@@ -16,10 +16,6 @@ class DrawReticle:
     def __init__(self, dname='reticle'):
         self.d_reticle = Device(dname)
 
-    def DrawBoundary(self):
-        rect_boundary = pg.rectangle(self.boundary_size, layer=80)
-        self.d_reticle.add(rect_boundary)
-
     def Draw_raw(self):
         from .reticle_setup import ssetup
         boundary_margin = np.array(self.boundary_margin)
@@ -67,7 +63,11 @@ class DrawReticle:
         sensors_info    = jdata["SENSORS"]
 
         rect_boundary = pg.rectangle(self.boundary_size, layer=LAYERS['AUX'])
+        rect_in = pg.rectangle((self.boundary_size[0]-self.boundary_margin[0]*2, 
+                                self.boundary_size[1]-self.boundary_margin[1]*2), layer=99)
+        rect_in.center = (0, 0)
         rect_boundary.center = (0, 0)
+        rect_boundary = pg.boolean(rect_boundary, rect_in, operation='not', layer=LAYERS['AUX'])
 
         self.d_reticle.add(rect_boundary)
 
@@ -95,7 +95,8 @@ class DrawReticle:
 
             # draw the sensor!
             sensor = lg.DrawSensor(**params, **layeropt, 
-                                   sensor_name=sensor_name, reticle_name=reticle_name)
+                                   sensor_name=sensor_name, reticle_name=reticle_name,
+                                   layers=LAYERS)
 
             sensor.center = center
             self.d_reticle.add(sensor)

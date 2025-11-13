@@ -163,7 +163,6 @@ class DrawPeriphery:
             rname.center = (edge.xmin + width/2, edge.y)
             edge = pg.boolean(edge, rname, operation='not', layer=layer)
 
-
         if oxide_open:
             oxopen = Device('edge_oxide_open')
             size = (100, 100)

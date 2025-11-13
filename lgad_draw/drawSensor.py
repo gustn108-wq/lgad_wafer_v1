@@ -62,7 +62,9 @@ class DrawSensor:
         per0   = Device('per0')
 
         if guardring:
-            d_gr    = draw_per.DrawGR(layer=LAYERS['GR'])
+            d_gr    = draw_per.DrawGR(layer=LAYERS['GR'], 
+                                      layer_metal=LAYERS['METAL'], 
+                                      layer_oxide=LAYERS['OXIDE'])
             per0.add(d_gr) 
             if print_progress: print ('Guard-ring is drawn.')
         if Nfg:
@@ -72,7 +74,8 @@ class DrawSensor:
         if edge:
             d_edge  = draw_per.DrawEdge(sensor_name=sensor_name, 
                                         reticle_name=reticle_name,
-                                        layer=LAYERS['METAL'])
+                                        layer=LAYERS['METAL'],
+                                        layer_oxide=LAYERS['OXIDE'])
             per0.add(d_edge) 
             if print_progress: print ('Edge is drawn.')
 

@@ -1,12 +1,15 @@
 #layer definitions
 LAYERNUM = {
-    'JTE'    : (1, 0),
-    'GR'     : (1, 1), 
-    'FGR'    : (1, 2), 
-    'GAIN'   : 2,
-    'PSTOP'  : 3,
-    'METAL'  : 4,
-    'NPLUS'  : 5,
-    'OXIDE'  : 6,
-    'AUX'    : 80,
-}
+            "JTE"  : 1,
+            "GR"   : 1, 
+            "FGR"  : 1, 
+            "GAIN" : 2,
+            "NPLUS": 3,
+            "PSTOP": 4,
+            "ILD"  : 5,
+            "METAL": 6,
+            "OXIDE": 7,
+            "AKEY" : 10,
+            "WAFER": 80,
+            "AUX"  : 81
+           }
