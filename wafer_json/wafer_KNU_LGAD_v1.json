@@ -215,7 +215,7 @@
             "SIZE": [19140, 19140],
             "CENTER": [-39280, 0],
             "NFG": 0,
-            "SRCFILE": "KNU_LGAD_v1_TypeD_FG0"
+            "SRCFILE": "./align_keys/akey1.gds"
         },
         {
             "NUM": 22,
@@ -255,7 +255,7 @@
             "SIZE": [19140, 19140],
             "CENTER": [39280, 0],
             "NFG": 0,
-            "SRCFILE": "KNU_LGAD_v1_TypeD_FG0"
+            "SRCFILE": "./align_keys/akey1.gds"
         },
         {
             "NUM": 26,

@@ -107,14 +107,18 @@ class DrawWafer:
         return D_reticles
 
     def LoadSrc(self, srcfile, rtname=None):
+        print (f'Loading {srcfile}')
         if srcfile in self.d_loaded.keys():
             return self.d_loaded[srcfile]
 
         if os.path.exists(srcfile):
-            if os.path.splitext(srcfile)[-1] == 'gds':
+            if os.path.splitext(srcfile)[-1] == '.gds':
                 ret = self.LoadSrc_gds(srcfile, rtname)
-            elif os.path.splitext(srcfile)[-1] == 'json':
+            elif os.path.splitext(srcfile)[-1] == '.json':
                 ret = self.LoadSrc_json(srcfile, rtname)
+            else:
+                print (f'{os.path.splitext(srcfile)[-1]}')
+                raise
         elif os.path.exists(srcfile+'.gds'):
             ret = self.LoadSrc_gds(srcfile+'.gds', rtname)
         elif os.path.exists(srcfile+'.json'):
@@ -127,16 +131,22 @@ class DrawWafer:
             ret = self.LoadSrc_gds(os.path.join(self.gdspath, srcfile+'.gds'), rtname)
         elif os.path.exists(os.path.join(self.jsonpath, srcfile+'.json')):
             ret = self.LoadSrc_json(os.path.join(self.jsonpath, srcfile+'.json'), rtname)
+        else:
+            print (f"[ERROR] The source file is not found: {srcfile}")
+            raise
 
-        ret.name = srcfile
         self.d_loaded[srcfile] = ret
 
         return ret
 
     def LoadSrc_gds(self, fname, rtname=None):
         d_reticle = pg.import_gds(fname)
+
         if rtname:
             d_reticle.name = rtname
+        else:
+            d_reticle.name = fname
+
         return d_reticle
 
     def LoadSrc_json(self, fname, rtname=None):
@@ -161,7 +171,11 @@ class DrawWafer:
         d_texts3 = Device('texts3')
 
         def _get_text(name, layer, font='Arial'):
-            d_txt = pg.text(text=name, size=4000, font=font, layer=layer)
+            try:
+                d_txt = pg.text(text=name, size=4000, font=font, layer=layer)
+            except ValueError:
+                d_txt = pg.text(text=name, size=4000, layer=layer)
+
             return d_txt
 
         d_texts1 << _get_text('#1 AKEY',   LAYERS['AKEY'])
