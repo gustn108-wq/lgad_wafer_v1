@@ -4,11 +4,11 @@ from phidl import Device
 from .dimPeriphery import DimPeriphery
 from . import layer_default
 
-LAYERS = layer_default.LAYERNUM
 
 class DrawPeriphery:
     tol = 0.1
     join='round'
+    layerset = layer_default.layerset
 
     def __init__(self, dim_per):
         if not isinstance(dim_per, DimPeriphery):
@@ -17,7 +17,7 @@ class DrawPeriphery:
         self.d_outmost = None
         self.dim_per = dim_per
 
-    def DrawPstop(self, layer=LAYERS['PSTOP']):
+    def DrawPstop(self, layer=layerset['PSTOP']):
         size = self.dim_per.pstop_size
         boff = self.dim_per.pstop_boff
         bsize = (size[0] - 2*boff, size[1] - 2*boff)
@@ -55,7 +55,7 @@ class DrawPeriphery:
         
         return pstop
 
-    def DrawGR(self, layer=LAYERS['JTE'], layer_metal=LAYERS['METAL'], layer_oxide=LAYERS['OXIDE'], layer_ild=LAYERS['ILD']):
+    def DrawGR(self, layer=layerset['JTE'], layer_metal=layerset['METAL'], layer_oxide=layerset['OXIDE'], layer_ild=layerset['ILD']):
         bsize = self.dim_per.base_size
         bcenter = self.dim_per.base_center
         gap = self.dim_per.gr_gap
@@ -111,7 +111,7 @@ class DrawPeriphery:
 
         return gr
 
-    def DrawFGs(self, Nfg=2, layer=LAYERS['JTE']):
+    def DrawFGs(self, Nfg=2, layer=layerset['JTE']):
         d_fgs = Device('fgs')
 
         if Nfg == 0:
@@ -142,7 +142,7 @@ class DrawPeriphery:
 
     def DrawEdge(self, sensor_name=None, reticle_name=None, 
                  reticle_name_blank=False, blank_size=None, fontsize=60, 
-                 layer=LAYERS['METAL'], oxide_open=True, layer_oxide=LAYERS['OXIDE']):
+                 layer=layerset['METAL'], oxide_open=True, layer_oxide=layerset['OXIDE']):
         size = self.dim_per.edge_size
         center = self.dim_per.edge_center
         grcenter = self.dim_per.gr_center

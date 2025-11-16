@@ -7,7 +7,6 @@ from phidl import Device
 from .dimPad import DimPad
 from . import layer_default 
 
-LAYERS = layer_default.LAYERNUM
 
 class DrawPad:
     d_gain = None
@@ -17,6 +16,7 @@ class DrawPad:
     d_padoxide = None
     tol = 0.1
     join='round'
+    layerset = layer_default.layerset
 
     def __init__(self, dim_pad): 
         if not isinstance(dim_pad, DimPad):
@@ -24,7 +24,7 @@ class DrawPad:
 
         self.dim_pad = dim_pad
 
-    def DrawGain(self, layer=LAYERS['GAIN']):
+    def DrawGain(self, layer=layerset['GAIN']):
         size = self.dim_pad.gain_size
         center = self.dim_pad.gain_center
 
@@ -35,7 +35,7 @@ class DrawPad:
         self.d_gain = gain
         return gain
 
-    def DrawNplus(self, layer=LAYERS['NPLUS']):
+    def DrawNplus(self, layer=layerset['NPLUS']):
         size = self.dim_pad.nplus_size
         center = self.dim_pad.nplus_center
 
@@ -46,7 +46,7 @@ class DrawPad:
         self.d_nplus = nplus
         return nplus 
         
-    def DrawJTE(self, layer=LAYERS['JTE']):
+    def DrawJTE(self, layer=layerset['JTE']):
         size = self.dim_pad.jte_size
         width = self.dim_pad.jte_width
         center = self.dim_pad.jte_center
@@ -64,7 +64,7 @@ class DrawPad:
         self.d_jte = jte
         return jte
 
-    def DrawPstop(self, layer=LAYERS['PSTOP']):
+    def DrawPstop(self, layer=layerset['PSTOP']):
         gap = self.dim_pad.pstop_gap
         width = self.dim_pad.pstop_width
         center = self.dim_pad.pstop_center
@@ -82,7 +82,7 @@ class DrawPad:
         self.d_pstop = pstop
         return pstop
 
-    def DrawPadMetal(self, layer=LAYERS['METAL']):
+    def DrawPadMetal(self, layer=layerset['METAL']):
         size = self.dim_pad.padmetal_size
         center = self.dim_pad.padmetal_center
         optwin_N = self.dim_pad.optwin_N
@@ -102,7 +102,7 @@ class DrawPad:
         self.d_padmetal = metal
         return metal
 
-    def DrawPadOxide(self, layer=LAYERS['OXIDE']):
+    def DrawPadOxide(self, layer=layerset['OXIDE']):
         size = self.dim_pad.padoxide_size
         width = self.dim_pad.padoxide_width
         center = self.dim_pad.padoxide_center
@@ -125,7 +125,7 @@ class DrawPad:
         self.d_padoxide = oxide
         return oxide
 
-    def DrawPadILD(self, layer=LAYERS['ILD']):
+    def DrawPadILD(self, layer=layerset['ILD']):
         size = self.dim_pad.padmetal_size
         center = self.dim_pad.padmetal_center
         optwin_N = self.dim_pad.optwin_N

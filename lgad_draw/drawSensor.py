@@ -19,12 +19,12 @@ class DrawSensor:
                 rounding=True, tol=0.1, print_progress=False, 
                 sensor_name=None, reticle_name=None, reticle_name_blank=False,
                 blank_size=None,
-                layers=None, rotation=0):
+                layerset=None, rotation=0):
 
-        if layers is None:
-            LAYERS = layer_default.LAYERNUM
+        if layerset is None:
+            self.layerset = layer_default.layerset
         else:
-            LAYERS = layers
+            self.layerset = layerset
 
         # set dimensions for pad
         dim_pad = lg.DimPad()     
@@ -71,13 +71,13 @@ class DrawSensor:
 
         # periphery
         if guardring:
-            d_gr    = draw_per.DrawGR(layer=LAYERS['JTE'], 
-                                      layer_metal=LAYERS['METAL'], 
-                                      layer_oxide=LAYERS['OXIDE'])
+            d_gr    = draw_per.DrawGR(layer=self.layerset['JTE'], 
+                                      layer_metal=self.layerset['METAL'], 
+                                      layer_oxide=self.layerset['OXIDE'])
             per0.add(d_gr) 
             if print_progress: print ('Guard-ring is drawn.')
         if Nfg:
-            d_fgs   = draw_per.DrawFGs(Nfg, layer=LAYERS['JTE'])
+            d_fgs   = draw_per.DrawFGs(Nfg, layer=self.layerset['JTE'])
             per0.add(d_fgs) 
             if print_progress: print ('Floating guard-ring is drawn.')
         if edge:
@@ -85,41 +85,41 @@ class DrawSensor:
                                         reticle_name=reticle_name,
                                         reticle_name_blank=reticle_name_blank,
                                         blank_size=blank_size,
-                                        layer=LAYERS['METAL'],
-                                        layer_oxide=LAYERS['OXIDE'])
+                                        layer=self.layerset['METAL'],
+                                        layer_oxide=self.layerset['OXIDE'])
             per0.add(d_edge) 
             if print_progress: print ('Edge is drawn.')
 
         # pad
         if gain: 
-            d_gain  = draw_pad.DrawGain(layer=LAYERS['GAIN'])
+            d_gain  = draw_pad.DrawGain(layer=self.layerset['GAIN'])
             pad0.add(d_gain) 
             if print_progress: print ('gain is drawn.')
         if nplus:
-            d_nplus = draw_pad.DrawNplus(layer=LAYERS['NPLUS'])
+            d_nplus = draw_pad.DrawNplus(layer=self.layerset['NPLUS'])
             pad0.add(d_nplus) 
             if print_progress: print ('nplus is drawn.')
         if jte:
-            d_jte   = draw_pad.DrawJTE(layer=LAYERS['JTE'])
+            d_jte   = draw_pad.DrawJTE(layer=self.layerset['JTE'])
             pad0.add(d_jte) 
             if print_progress: print ('jte is drawn.')
         if pstop:
-            d_pstop1 = draw_pad.DrawPstop(layer=LAYERS['PSTOP'])
+            d_pstop1 = draw_pad.DrawPstop(layer=self.layerset['PSTOP'])
             pad0.add(d_pstop1)
             if print_progress: print ('pstop is drawn')
 
         if padild:
-            d_padild = draw_pad.DrawPadILD(layer=LAYERS['ILD'])
+            d_padild = draw_pad.DrawPadILD(layer=self.layerset['ILD'])
             pad0.add(d_padild) 
             if print_progress: print ('pad ild is drawn.')
 
         if padmetal:
-            d_padme = draw_pad.DrawPadMetal(layer=LAYERS['METAL'])
+            d_padme = draw_pad.DrawPadMetal(layer=self.layerset['METAL'])
             pad0.add(d_padme) 
             if print_progress: print ('pad metal is drawn.')
 
         if padoxide:
-            d_padox = draw_pad.DrawPadOxide(layer=LAYERS['OXIDE'])
+            d_padox = draw_pad.DrawPadOxide(layer=self.layerset['OXIDE'])
             pad0.add(d_padox) 
             if print_progress: print ('pad oxide is drawn.')
 

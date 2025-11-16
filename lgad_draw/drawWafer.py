@@ -7,14 +7,15 @@ from phidl import geometry as pg
 from phidl import Device, LayerSet
 
 import lgad_draw as lg
-from .layer_default import LAYERNUM
+from . import layer_default
 
-LAYERS = LAYERNUM
 
 class DrawWafer:
+    layerset = layer_default.layerset
     wafer_diameter   = 150   * 1000 # inch -> mm -> um
     wafer_cut_length =  57.5 * 1000 # mm -> um
     ebr_width        = 5000         # um
+
 
     wafer_radius     = wafer_diameter / 2
     wafer_cut_half   = wafer_cut_length / 2
@@ -28,7 +29,7 @@ class DrawWafer:
     def __init__(self):
         pass
 
-    def DrawBoundary(self, layer=LAYERS['WAFER']):
+    def DrawBoundary(self, layer=layerset['WAFER']):
         circ = pg.circle(radius = self.wafer_radius, layer=layer)
         circ.center = (0, 0)
 
@@ -42,7 +43,7 @@ class DrawWafer:
         wafer = pg.boolean(wafer, wafer_inner, operation='not', layer=layer)
         return wafer
 
-    def DrawReticleBoundaries(self, layer=LAYERS['AUX']):
+    def DrawReticleBoundaries(self, layer=layerset['AUX']):
         rect_in = pg.rectangle(size=self.reticle_size, layer=99)
         rect_out = pg.offset(rect_in, distance=self.reticle_margin[0], layer=99)
         rect = pg.boolean(rect_out, rect_in, operation='not', layer=layer)
@@ -200,13 +201,14 @@ class DrawWafer:
             reticle_name = rtname
 
         reticle = lg.DrawReticle(reticle_name)
+        reticle.layerset = self.layerset
         d_reticle = reticle.Draw_from_json(fname)
 
         gdsname = os.path.join(self.gdspath, os.path.splitext(os.path.split(fname)[-1])[0]+'.gds')
         d_reticle.write_gds(gdsname)
         return d_reticle
 
-    def DrawReticleNames(self, jsonname, wrname, rcenter, bsize, fontsize=60, layer=LAYERS['METAL']):
+    def DrawReticleNames(self, jsonname, wrname, rcenter, bsize, fontsize=60, layer=layerset['METAL']):
         nameplate = pg.rectangle(size=bsize, layer=layer)
         nameplate.center = (0, 0)
         d_name = pg.text(text=wrname, size=fontsize, layer=layer)
@@ -267,16 +269,16 @@ class DrawWafer:
 
             return d_txt
 
-        d_texts1 << _get_text('#1 AKEY',   LAYERS['AKEY'])
-        d_texts1 << _get_text('#2 JTE',    LAYERS['JTE'])
-        d_texts1 << _get_text('#3 GAIN',   LAYERS['GAIN'])
-        d_texts1 << _get_text('#4 NPLUS',  LAYERS['NPLUS'])
-        d_texts2 << _get_text('#5 PSTOP',  LAYERS['PSTOP'])
-        d_texts2 << _get_text('#6 ILD',    LAYERS['ILD'])
-        d_texts2 << _get_text('#7 METAL',  LAYERS['METAL'])
-        d_texts2 << _get_text('#8 OXIDE',  LAYERS['OXIDE'])
-        d_texts3 << _get_text('#80 WAFER', LAYERS['WAFER'])
-        d_texts3 << _get_text('#81 AUX',   LAYERS['AUX'])
+        d_texts1 << _get_text('#1 AKEY',   self.layerset['AKEY'])
+        d_texts1 << _get_text('#2 JTE',    self.layerset['JTE'])
+        d_texts1 << _get_text('#3 GAIN',   self.layerset['GAIN'])
+        d_texts1 << _get_text('#4 NPLUS',  self.layerset['NPLUS'])
+        d_texts2 << _get_text('#5 PSTOP',  self.layerset['PSTOP'])
+        d_texts2 << _get_text('#6 ILD',    self.layerset['ILD'])
+        d_texts2 << _get_text('#7 METAL',  self.layerset['METAL'])
+        d_texts2 << _get_text('#8 OXIDE',  self.layerset['OXIDE'])
+        d_texts3 << _get_text('#80 WAFER', self.layerset['WAFER'])
+        d_texts3 << _get_text('#81 AUX',   self.layerset['AUX'])
 
         d_texts1.distribute(elements='all', direction='x', spacing=2000, separation=True)
         d_texts1.center = (0, -self.wafer_cut_dist-6000)
@@ -298,3 +300,4 @@ class DrawWafer:
             jdata = json.load(f)
         return jdata
 
+    

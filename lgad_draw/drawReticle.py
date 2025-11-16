@@ -5,10 +5,14 @@ from phidl import Device
 
 import lgad_draw as lg
 
+from . import layer_default 
+
 class DrawReticle:
     boundary_size   = (19140, 19140)
     boundary_margin = (250, 250)
     pad_gap         = (100, 100)
+
+    layerset = layer_default.layerset
 
     d_reticle = None
     
@@ -54,7 +58,6 @@ class DrawReticle:
         boundary_size   = jdata["RETICLESIZE"]
         boundary_margin = jdata["BOUNDMARGIN"]
         pad_gap         = jdata["PADGAP"]
-        LAYERS          = jdata["LAYERNUM"]
         paramdefault    = jdata["PARAMDEFAULT"]
         layerdefault    = jdata["LAYERDEFAULT"]
         prefix          = jdata["SENSORPREFIX"]
@@ -62,12 +65,12 @@ class DrawReticle:
         blank_size      = jdata["BLANKSIZE"] 
         sensors_info    = jdata["SENSORS"]
 
-        rect_boundary = pg.rectangle(self.boundary_size, layer=LAYERS['AUX'])
+        rect_boundary = pg.rectangle(self.boundary_size, layer=self.layerset['AUX'])
         rect_out = pg.rectangle((self.boundary_size[0]+self.boundary_margin[0]*2, 
                                 self.boundary_size[1]+self.boundary_margin[1]*2), layer=99)
         rect_out.center = (0, 0)
         rect_boundary.center = (0, 0)
-        rect_boundary = pg.boolean(rect_out, rect_boundary, operation='not', layer=LAYERS['AUX'])
+        rect_boundary = pg.boolean(rect_out, rect_boundary, operation='not', layer=self.layerset['AUX'])
 
         self.d_reticle.add_ref(rect_boundary)
 
@@ -98,7 +101,7 @@ class DrawReticle:
                                    sensor_name=sensor_name, reticle_name=reticle_name,
                                    reticle_name_blank=blank_name,
                                    blank_size=blank_size,
-                                   layers=LAYERS)
+                                   layerset=self.layerset)
             sensor.name = f'sensor_{i:03}_{sensor.name.split("_")[-1]}'
             sensor.center = center
             self.d_reticle.add_ref(sensor)
