@@ -9,72 +9,256 @@ import lgad_draw as lg
 class DrawAlignkey:
     layerset = lg.layer_default.layerset
 
-    center_size = (1800, 800)
+    if_size = (5000, 5000)
+    if_width = 100
+
+    center_size = (1800, 1000)
     center_width = -10
 
     sidewin_size = (1800, 400)
     sidewin_offset = 20
 
-    posrect_size = (220, 250)
+    posrect_size = (220, 320)
     posrect_array = (3, 8)
 
     lx_l = 150 
     lx_w = lx_l/3
     sx_l = 90
     sx_w = sx_l/3
+    
+    np_size = (200, 60)
+    np_offset = 30
 
     d_posrect = None
     r_posrect = []
 
+    font = 'DEPLOF'
+    #font = '/usr/share/fonts/truetype/ubuntu/UbuntuMono-B.ttf'
+    fontsize = 50
 
-    akey_setup = {
+
+    akey_setup_org = {
         'AKEY': {
-            'text'    : "AKE",
+            'ltext'   : ["AKEY", "AKEY", "AKEY", "AKEY", "AKEY", "AKEY", "AKEY"],
+            'stext'   : ["JTE", "GAIN", "NPLU", "PSTO", "ILD", "META", "OXID"],
+            'text'    : ["AK.JT", "AK.GA", "AK.NP", "AK.PS", "AK.IL", "AK.ME", "AK.OX"],
             'lcoords' : [(0, 0), (0, 2), (0, 4), (0, 6), (1, 0), (1, 4), (2, 2)],
             'scoords' : [(0, 1), (0, 3), (0, 5), (0, 7), (1, 1), (1, 5), (2, 3)],
             'xoffset' : 0
             },
         'JTE': {
-            'text'    : "JTE",
+            'ltext'   : [None],
+            'stext'   : [None],
             'lcoords' : [(0, 0)],
             'scoords' : [(0, 1)],
             'xoffset' : 5
         },
         'GAIN': {
-            'text'    : "GAI",
+            'ltext'   : [None],
+            'stext'   : [None],
             'lcoords' : [(0, 2)],
             'scoords' : [(0, 3)],
             'xoffset' : [5]
         },
         'NPLUS': {
-            'text'    : "NPL",
+            'ltext'   : [None],
+            'stext'   : [None],
             'lcoords' : [(0, 4)],
             'scoords' : [(0, 5)],
             'xoffset' : [5]
         },
         'PSTOP': {
-            'text'    : "PST",
+            'ltext'   : [None],
+            'stext'   : [None],
             'lcoords' : [(0, 6)],
             'scoords' : [(0, 7)],
             'xoffset' : [5]
         },
         'ILD': {
-            'text'    : "ILD",
+            'ltext'   : [None, "ILD", "ILD"],
+            'stext'   : [None, "META", "OXID"],
+            'text'    : [None, "IL.ME", "IL.OX"],
             'lcoords' : [(1, 0), (1, 2), (2, 0)],
             'scoords' : [(1, 1), (1, 3), (2, 1)],
-            'xoffset' : [5, 5, 5]
+            'xoffset' : [5, 5, 0]
         },
         'METAL': {
-            'text'    : "MET",
+            'ltext'    : [None, None, "META"],
+            'stext'    : [None, None, "OXID"],
             'lcoords' : [(1, 2), (1, 4), (2, 4)],
             'scoords' : [(1, 3), (1, 5), (2, 5)],
+            'npolar'  : -1,
             'xoffset' : [0, -5, -5]
         },
         'OXIDE': {
-            'text'    : "OXI",
+            'ltext'    : [None, None, None],
+            'stext'    : [None, None, None],
             'lcoords' : [(2, 0), (2, 2), (2, 4)],
             'scoords' : [(2, 1), (2, 3), (2, 5)],
-            'xoffset' : [0, 5, 0]
+            'xoffset' : [0, 5, 5]
+        },
+    }
+
+    akey_setup = {
+        'AKEY': {
+            'ltext'   : ["AKEY", "AKEY", "AKEY", "AKEY", "AKEY", "AKEY", "AKEY"],
+            'stext'   : ["JTE", "GAIN", "NPLU", "PSTO", "ILD", "META", "OXID"],
+            'lcoords' : [(0, 0), (0, 2), (0, 4), (0, 6), (1, 0), (1, 4), (2, 2)],
+            'scoords' : [(0, 1), (0, 3), (0, 5), (0, 7), (1, 1), (1, 5), (2, 3)],
+            'lx_l'    : 150,
+            'sx_l'    : 90,
+            },
+        'JTE': {
+            'ltext'   : [None],
+            'stext'   : [None],
+            'lcoords' : [(0, 1)],
+            'scoords' : [(0, 0)],
+            'lx_l'    : 150,
+            'sx_l'    : 90,
+        },
+        'GAIN': {
+            'ltext'   : [None],
+            'stext'   : [None],
+            'lcoords' : [(0, 3)],
+            'scoords' : [(0, 2)],
+            'lx_l'    : 150,
+            'sx_l'    : 90,
+        },
+        'NPLUS': {
+            'ltext'   : [None],
+            'stext'   : [None],
+            'lcoords' : [(0, 5)],
+            'scoords' : [(0, 4)],
+            'lx_l'    : 150,
+            'sx_l'    : 90,
+        },
+        'PSTOP': {
+            'ltext'   : [None],
+            'stext'   : [None],
+            'lcoords' : [(0, 7)],
+            'scoords' : [(0, 6)],
+            'lx_l'    : 150,
+            'sx_l'    : 90,
+        },
+        'ILD': {
+            'ltext'   : [None, "ILD", "ILD"],
+            'stext'   : [None, "META", "OXID"],
+            'text'    : [None, "IL.ME", "IL.OX"],
+            'lcoords' : [(1, 1), (1, 2), (2, 0)],
+            'scoords' : [(1, 0), (1, 3), (2, 1)],
+            'lx_l'    : 150,
+            'sx_l'    : 90,
+        },
+        'METAL': {
+            'ltext'    : [None, None, "META"],
+            'stext'    : [None, None, "OXID"],
+            'lcoords' : [(1, 3), (1, 5), (2, 4)],
+            'scoords' : [(1, 2), (1, 4), (2, 5)],
+            'npolar'  : -1,
+            'lx_l'    : 150,
+            'sx_l'    : 90,
+        },
+        'OXIDE': {
+            'ltext'    : [None, None, None],
+            'stext'    : [None, None, None],
+            'lcoords' : [(2, 1), (2, 3), (2, 5)],
+            'scoords' : [(2, 0), (2, 2), (2, 4)],
+            'lx_l'    : 150,
+            'sx_l'    : 90,
+        },
+    }
+
+    akey_setup_neg = {
+        'AKEY': {
+            'ltext'   : ["AKEY", "AKEY", "AKEY", "AKEY", "AKEY", "AKEY", "AKEY"],
+            'stext'   : ["JTE", "GAIN", "NPLU", "PSTO", "ILD", "META", "OXID"],
+            'text'    : ["AK.JT", "AK.GA", "AK.NP", "AK.PS", "AK.IL", "AK.ME", "AK.OX"],
+            'lcoords' : [(0, 0), (0, 2), (0, 4), (0, 6), (1, 0), (1, 4), (2, 2)],
+            'scoords' : [(0, 1), (0, 3), (0, 5), (0, 7), (1, 1), (1, 5), (2, 3)],
+            'lpolar'  : 1,
+            'spolar'  : 1,
+            'lx_l'    : 150,
+            'sx_l'    : 90,
+            'xoffset' : 0
+            },
+        'JTE': {
+            'ltext'   : [None],
+            'stext'   : [None],
+            'lcoords' : [(0, 1)],
+            'scoords' : [(0, 0)],
+            'lpolar'  : 1,
+            'spolar'  : -1,
+            'lx_l'    : 150,
+            'sx_l'    : 90,
+            'xoffset' : 0
+        },
+        'GAIN': {
+            'ltext'   : [None],
+            'stext'   : [None],
+            'lcoords' : [(0, 3)],
+            'scoords' : [(0, 2)],
+            'lpolar'  : 1,
+            'spolar'  : -1,
+            'lx_l'    : 150,
+            'sx_l'    : 90,
+            'xoffset' : 0
+        },
+        'NPLUS': {
+            'ltext'   : [None],
+            'stext'   : [None],
+            'lcoords' : [(0, 5)],
+            'scoords' : [(0, 4)],
+            'lpolar'  : 1,
+            'spolar'  : -1,
+            'lx_l'    : 150,
+            'sx_l'    : 90,
+            'xoffset' : 0
+        },
+        'PSTOP': {
+            'ltext'   : [None],
+            'stext'   : [None],
+            'lcoords' : [(0, 7)],
+            'scoords' : [(0, 6)],
+            'lpolar'  : 1,
+            'spolar'  : -1,
+            'lx_l'    : 150,
+            'sx_l'    : 90,
+            'xoffset' : 0
+        },
+        'ILD': {
+            'ltext'   : [None, "ILD", "ILD"],
+            'stext'   : [None, "META", "OXID"],
+            'text'    : [None, "IL.ME", "IL.OX"],
+            'lcoords' : [(1, 1), (1, 2), (2, 0)],
+            'scoords' : [(1, 0), (1, 3), (2, 1)],
+            'lpolar'  : 1,
+            'spolar'  : [-1, 1, 1],
+            'lx_l'    : 150,
+            'sx_l'    : 90,
+            'xoffset' : 0
+        },
+        'METAL': {
+            'ltext'    : [None, None, "META"],
+            'stext'    : [None, None, "OXID"],
+            'lcoords' : [(1, 3), (1, 5), (2, 4)],
+            'scoords' : [(1, 2), (1, 4), (2, 5)],
+            'lpolar'  : -1,
+            'spolar'  : 1,
+            'npolar'  : -1,
+            'lx_l'    : 150,
+            'sx_l'    : 90,
+            'xoffset' : 0
+        },
+        'OXIDE': {
+            'ltext'    : [None, None, None],
+            'stext'    : [None, None, None],
+            'lcoords' : [(2, 1), (2, 3), (2, 5)],
+            'scoords' : [(2, 0), (2, 2), (2, 4)],
+            'lpolar'  : 1,
+            'spolar'  : -1,
+            'lx_l'    : 150,
+            'sx_l'    : 90,
+            'xoffset' : 0
         },
     }
 
@@ -82,13 +266,30 @@ class DrawAlignkey:
         pass
 
     def draw_frame(self, layer=layerset):
+        d_frame = Device('outer_frame')
         rect_out = pg.rectangle(size=(10100, 15700))
         rect_in  = pg.rectangle(size=(9000, 9000))
         rect_out.center = (0, 0)
         rect_in.center = (0, 0)
-        frame = pg.boolean(rect_out, rect_in, operation='not', layer=1)
 
-        return frame
+        for k in self.akey_setup.keys():
+            frame = pg.boolean(rect_out, rect_in, operation='not', layer=layer[k])
+            r_frame = d_frame.add_ref(frame)
+
+        return d_frame
+
+    def draw_inner_frames(self, nframe=1, layer=layerset):
+        d_frame = Device('outer_frame')
+
+        for i in range(nframe):
+            rect_out = pg.rectangle(size=np.array(self.if_size)*(i+1))
+
+            for k in self.akey_setup.keys():
+                frame = pg.outline(rect_out, distance=-self.if_width, layer=layer[k])
+                r_frame = d_frame.add_ref(frame)
+                r_frame.center = (0, 0)
+
+        return d_frame
 
     def draw_cross(self, length, layer):
         recth = pg.rectangle(size=(length, length/3), layer=layer)
@@ -164,57 +365,152 @@ class DrawAlignkey:
 
         return d_posrect
 
-    def place_large_crosses(self, coords, layer, offset=0):
+    def place_large_crosses(self, coords, layer, x_l, polar, name=None, npolar=1, offset=0):
         if self.r_posrect == []:
             self.draw_posrect()
 
         if isinstance(offset, (int, float)):
             offset = [offset] * len(coords)
 
-        d_lx = Device('large_x')
-        large_cross = self.draw_cross(length=self.lx_l, layer=layer)
+        if isinstance(polar, (int, float)):
+            polar = [polar] * len(coords)
 
-        for coord, off in zip(coords, offset):
+        d_x = Device('large_x')
+        large_cross = self.draw_cross(length=x_l, layer=layer)
+
+        for coord, off, pol, na in zip(coords, offset, polar, name):
             if off:
                 large_cross1 = pg.offset(large_cross, distance=off, layer=layer)
             else:
                 large_cross1 = large_cross
 
-            r_lx = d_lx.add_ref(large_cross1)
-            r_lx.center = self.r_posrect[coord[0]][coord[1]].center
-            
-        return d_lx
+            d_onex = Device('onex')
 
-    def place_small_crosses(self, coords, layer, offset=0):
+            r_lx = d_onex.add_ref(large_cross1)
+            r_posrect = self.r_posrect[coord[0]][coord[1]]
+            r_lx.center = r_posrect.center
+            r_lx.center = (r_lx.center[0], r_lx.center[1] + self.np_size[1]/2 + self.np_offset/2)
+
+            d_np = pg.rectangle(size=self.np_size, layer=layer)
+            d_np.center = (r_lx.center[0]+0, r_lx.center[1] - self.lx_l/2 - self.np_size[1]/2 - self.np_offset)
+
+            if na:
+                d_name = pg.text(text=na, size=self.fontsize, font=self.font, layer=layer)
+                d_name.center = d_np.center
+                if npolar < 0:
+                    d_name = pg.boolean(d_np, d_name, operation='not', layer=layer)
+                r_np = d_onex.add_ref(d_name)
+            else:
+                if pol < 0:
+                    if npolar < 0:
+                        r_np = d_onex.add_ref(d_np)
+                    else:
+                        r_np = d_onex.add_ref(pg.outline(d_np, distance=10, layer=layer))
+                else:
+                    if npolar < 0:
+                        r_np = d_onex.add_ref(pg.outline(d_np, distance=10, layer=layer))
+                    else:
+                        r_np = d_onex.add_ref(d_np)
+
+            if pol < 0:
+                d_onex = pg.boolean(r_posrect, d_onex, operation='not', layer=layer)
+
+            d_x.add_ref(d_onex)
+            
+        return d_x
+
+    def place_small_crosses(self, coords, layer, x_l, polar, name=None, npolar=1, offset=0):
         if self.r_posrect == []:
             self.draw_posrect()
 
         if isinstance(offset, (int, float)):
             offset = [offset] * len(coords)
 
-        d_sx = Device('small_x')
-        small_cross = self.draw_cross(length=self.sx_l, layer=layer)
+        if isinstance(polar, (int, float)):
+            polar = [polar] * len(coords)
 
-        for coord, off in zip(coords, offset):
+        d_x = Device('small_x')
+        small_cross = self.draw_cross(length=x_l, layer=layer)
+
+        for coord, off, pol, na in zip(coords, offset, polar, name):
             if off:
                 small_cross1 = pg.offset(small_cross, distance=off, layer=layer)
             else:
                 small_cross1 = small_cross
-            r_sx = d_sx.add_ref(small_cross1)
-            r_sx.center = self.r_posrect[coord[0]][coord[1]].center
+
+            d_onex = Device('onex')
+
+            r_sx = d_onex.add_ref(small_cross1)
+            r_posrect = self.r_posrect[coord[0]][coord[1]]
+            r_sx.center = r_posrect.center
+            r_sx.center = (r_sx.center[0], r_sx.center[1] + self.np_size[1]/2 + self.np_offset/2)
+
+            d_np = pg.rectangle(size=self.np_size, layer=layer)
+            d_np.center = (r_sx.center[0]+0, r_sx.center[1] - self.lx_l/2 - self.np_size[1]/2 - self.np_offset)
+
+            if na:
+                d_name = pg.text(text=na, size=self.fontsize, font=self.font, layer=layer)
+                d_name.center = d_np.center
+                if npolar < 0:
+                    d_name = pg.boolean(d_np, d_name, operation='not', layer=layer)
+                r_np = d_onex.add_ref(d_name)
+            else:
+                if pol < 0:
+                    if npolar < 0:
+                        r_np = d_onex.add_ref(d_np)
+                    else:
+                        r_np = d_onex.add_ref(pg.outline(d_np, distance=10, layer=layer))
+                else:
+                    if npolar < 0:
+                        r_np = d_onex.add_ref(pg.outline(d_np, distance=10, layer=layer))
+                    else:
+                        r_np = d_onex.add_ref(d_np)
+
+            if pol < 0:
+                d_onex = pg.boolean(r_posrect, d_onex, operation='not', layer=layer)
+
+
+
+            d_x.add_ref(d_onex)
             
-        return d_sx
+        return d_x
 
     def draw_keys(self):
         d_keys = Device('keys')
+
         for k, v in self.akey_setup.items():
             if 'xoffset' in v.keys():
                 xoffset = v['xoffset']
             else:
                 xoffset = 0
 
-            d_keys.add_ref(self.place_large_crosses(v['lcoords'], layer=self.layerset[k], offset=xoffset))
-            d_keys.add_ref(self.place_small_crosses(v['scoords'], layer=self.layerset[k], offset=xoffset))
+            if 'lx_l' in v.keys():
+                lx_l = v['lx_l']
+            else:
+                lx_l = self.lx_l
+
+            if 'sx_l' in v.keys():
+                sx_l = v['sx_l']
+            else:
+                sx_l = self.sx_l
+
+            if 'lpolar' in v.keys():
+                lpolar = v['lpolar']
+            else:
+                lpolar = 1
+
+            if 'spolar' in v.keys():
+                spolar = v['spolar']
+            else:
+                spolar = 1
+
+            if 'npolar' in v.keys():
+                npolar = v['npolar']
+            else:
+                npolar = 1
+
+            d_keys.add_ref(self.place_large_crosses(v['lcoords'], layer=self.layerset[k], x_l=lx_l, polar=lpolar, name=v['ltext'], npolar=npolar, offset=xoffset))
+            d_keys.add_ref(self.place_small_crosses(v['scoords'], layer=self.layerset[k], x_l=sx_l, polar=spolar, name=v['stext'], npolar=npolar, offset=xoffset))
 
         return d_keys
 
@@ -248,9 +544,15 @@ class DrawAlignkey:
     def draw_all(self):
         D = Device('alignkey')
 
-        # align keys
-        r_key = D.add_ref(self.load_align_key('align_keys/akey.gds'))
-        r_key.center = (2000, 0)
+        # load align keys
+        #r_key = D.add_ref(self.load_align_key('align_keys/akey.gds'))
+        #r_key.center = (2000, 0)
+
+        # outer frame
+        r_of = D.add_ref(self.draw_frame())
+
+        # inner frame
+        r_if = D.add_ref(self.draw_inner_frames(nframe=1))
 
         # center frame
         r_cf = D.add_ref(self.draw_centerframe())
@@ -268,7 +570,7 @@ class DrawAlignkey:
         # keys
         r_keys = D.add_ref(self.draw_keys())
 
-        D.write_gds('akey1.gds')
+        D.write_gds('align_keys/akey1.gds')
 
         return D
 
@@ -276,7 +578,7 @@ if __name__=="__main__":
     da = DrawAlignkey()
     d = da.draw_all()
     
-    lg.qp(d)
-    plt.show()
+    #lg.qp(d)
+    #plt.show()
 
 
