@@ -1,5 +1,5 @@
 import sys
-import json
+import json5
 import re
 
 import numpy as np
@@ -163,15 +163,15 @@ def make():
         # end of for j
     # end of for i
 
-    js = json.dumps(dic, indent=4) 
+    js = json5.dumps(dic, indent=4) 
 
-    pattern = r'\[\s*(-?\d+)\s*,\s*(-?\d+)\s*\]'
-    replacement = r'[\1, \2]'
+    pattern = r"\[\s*(-?\d+)\s*,\s*(-?\d+)\s*,?\s*\]"
+    replacement = r'[ \1, \2 ]'
 
     js1 = re.sub(pattern, replacement, js)
     print (js1)
 
-    with open("wafer_template.json", "w", encoding="utf-8") as f:
+    with open("wafer_template.json5", "w", encoding="utf-8") as f:
         f.write(js1) 
 
 
