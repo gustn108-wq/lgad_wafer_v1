@@ -1,5 +1,5 @@
 import sys
-import json
+import json5
 import re
 
 centers = [
@@ -151,17 +151,16 @@ def make():
 
             dic["SENSORS"].append(dic_sensor.copy()) 
 
-    js = json.dumps(dic, indent=4) 
+    js = json5.dumps(dic, indent=4) 
 
-    pattern = r'\[\s*(-?\d+)\s*,\s*(-?\d+)\s*\]'
-    replacement = r'[\1, \2]'
+    pattern = r"\[\s*(-?\d+)\s*,\s*(-?\d+)\s*,?\s*\]"
+    js1 = re.sub(pattern, r"[ \1, \2 ]", js)
 
-    js1 = re.sub(pattern, replacement, js)
+    #js1 = re.sub(pattern, replacement, js)
     print (js1)
 
-    with open("reticle_template.json", "w", encoding="utf-8") as f:
+    with open("reticle_template.json5", "w", encoding="utf-8") as f:
         f.write(js1) 
-
 
 if __name__=="__main__":
     make()
