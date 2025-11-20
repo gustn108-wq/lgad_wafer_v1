@@ -38,7 +38,8 @@ class DrawAlignkey:
     #font = '/usr/share/fonts/truetype/ubuntu/UbuntuMono-B.ttf'
     fontsize = 50
 
-    akey_setup = akey_setups.akey_setup_3_double_pos
+    akey_setup = akey_setups.akey_setup_2_neg
+    #akey_setup = akey_setups.akey_setup_3_twins
 
     def __init__(self):
         pass
@@ -348,7 +349,7 @@ class DrawAlignkey:
         # keys
         r_keys = D.add_ref(self.draw_keys())
 
-        D.write_gds('align_keys/akey1.gds')
+        D.write_gds('align_keys/akey_posneg.gds')
 
         return D
 

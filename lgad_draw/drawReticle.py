@@ -131,8 +131,16 @@ class DrawReticle:
         sname += f' -{nx}x{ny}'
         #sname += f' -{lgadpin}'
         sname += f' -F{Nfg}'
-        sname += f' -J{jte_width}'
-        sname += f' -P{pstop_width}'
+        #sname += f' -J{jte_width}'
+        #sname += f' -P{pstop_width}'
+
+        # Only include J value if JTE is active
+        if layeropt.get("jte", True):
+            sname += f' -J{jte_width}'
+
+        # Only include P value if PSTOP is active
+        if layeropt.get("pstop", True):
+            sname += f' -P{pstop_width}'
 
         return sname
 

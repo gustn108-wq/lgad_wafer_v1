@@ -61,7 +61,10 @@
                 "center": [-8520, 8520]
             },
             "LAYEROPTOUT": {
-                }
+                "jte": false,
+                "pstop": false,
+                "guardring": false
+}
         },
         {
             "NUM": 2,
@@ -74,7 +77,11 @@
                 "ny": 1,
                 "center": [-6320, 8520]
             },
-            "LAYEROPTOUT": {}
+            "LAYEROPTOUT": {
+                "jte": false,
+                "pstop": false,
+                "guardring": false
+}
         },
         {
             "NUM": 3,
@@ -87,7 +94,11 @@
                 "ny": 1,
                 "center": [-4120, 8520]
             },
-            "LAYEROPTOUT": {}
+            "LAYEROPTOUT": {
+                "jte": false,
+                "pstop": false,
+                "guardring": false
+}
         },
         {
             "NUM": 4,
@@ -113,7 +124,11 @@
                 "ny": 1,
                 "center": [920, 8520]
             },
-            "LAYEROPTOUT": {}
+            "LAYEROPTOUT": {
+                "jte": false,
+                "pstop": false,
+                "guardring": false
+}
         },
         {
             "NUM": 6,
@@ -126,7 +141,11 @@
                 "ny": 1,
                 "center": [4400, 8520]
             },
-            "LAYEROPTOUT": {}
+            "LAYEROPTOUT": {
+                "jte": false,
+                "pstop": false,
+                "guardring": false
+}
         },
         {
             "NUM": 7,
@@ -152,7 +171,12 @@
                 "ny": 1,
                 "center": [-8520, 6320]
             },
-            "LAYEROPTOUT": {}
+            "LAYEROPTOUT": {
+                "gain" : false,
+                "jte": false,
+                "pstop": false,
+                "guardring": false
+}
         },
         {
             "NUM": 9,
@@ -165,7 +189,12 @@
                 "ny": 1,
                 "center": [-6320, 6320]
             },
-            "LAYEROPTOUT": {}
+            "LAYEROPTOUT": {
+                "gain" : false,
+                "jte": false,
+                "pstop": false,
+                "guardring": false
+}
         },
         {
             "NUM": 10,
@@ -178,7 +207,12 @@
                 "ny": 1,
                 "center": [-4120, 6320]
             },
-            "LAYEROPTOUT": {}
+            "LAYEROPTOUT": {
+                "gain" : false,
+                "jte": false,
+                "pstop": false,
+                "guardring": false
+}
         },
         {
             "NUM": 11,
@@ -204,7 +238,12 @@
                 "ny": 1,
                 "center": [920, 6320]
             },
-            "LAYEROPTOUT": {}
+            "LAYEROPTOUT": {
+                "gain" : false,
+                "jte": false,
+                "pstop": false,
+                "guardring": false
+}
         },
         {
             "NUM": 13,
@@ -217,7 +256,12 @@
                 "ny": 1,
                 "center": [4400, 6320]
             },
-            "LAYEROPTOUT": {}
+            "LAYEROPTOUT": {
+                "gain" : false,
+                "jte": false,
+                "pstop": false,
+                "guardring": false
+}
         },
         {
             "NUM": 14,
@@ -243,7 +287,10 @@
                 "ny": 1,
                 "center": [-8520, 4120]
             },
-            "LAYEROPTOUT": {}
+            "LAYEROPTOUT": {
+                "pstop": false,
+                "guardring": false
+}
         },
         {
             "NUM": 16,
@@ -256,7 +303,10 @@
                 "ny": 1,
                 "center": [-6320, 4120]
             },
-            "LAYEROPTOUT": {}
+            "LAYEROPTOUT": {
+                "pstop": false,
+                "guardring": false
+}
         },
         {
             "NUM": 17,
@@ -269,7 +319,10 @@
                 "ny": 1,
                 "center": [-4120, 4120]
             },
-            "LAYEROPTOUT": {}
+            "LAYEROPTOUT": {
+                "pstop": false,
+                "guardring": false
+}
         },
         {
             "NUM": 18,
@@ -295,8 +348,10 @@
                 "ny": 1,
                 "center": [920, 4120]
             },
-            "LAYEROPTOUT": {}
-        },
+            "LAYEROPTOUT": {
+                "pstop": false,
+                "guardring": false
+}        },
         {
             "NUM": 20,
             "NAME": "",
@@ -308,8 +363,10 @@
                 "ny": 1,
                 "center": [4400, 4120]
             },
-            "LAYEROPTOUT": {}
-        },
+            "LAYEROPTOUT": {
+                "pstop": false,
+                "guardring": false
+}        },
         {
             "NUM": 21,
             "NAME": "",
@@ -334,8 +391,9 @@
                 "ny": 1,
                 "center": [-8520, 1920]
             },
-            "LAYEROPTOUT": {}
-        },
+            "LAYEROPTOUT": {
+                "guardring": false
+}        },
         {
             "NUM": 23,
             "NAME": "",
@@ -347,7 +405,9 @@
                 "ny": 1,
                 "center": [-6320, 1920]
             },
-            "LAYEROPTOUT": {}
+            "LAYEROPTOUT": {
+                "guardring": false
+}   
         },
         {
             "NUM": 24,
@@ -360,7 +420,9 @@
                 "ny": 1,
                 "center": [-4120, 1920]
             },
-            "LAYEROPTOUT": {}
+            "LAYEROPTOUT": {
+                "guardring": false
+}   
         },
         {
             "NUM": 25,
@@ -386,8 +448,9 @@
                 "ny": 1,
                 "center": [920, 1920]
             },
-            "LAYEROPTOUT": {}
-        },
+            "LAYEROPTOUT": {
+                "guardring": false
+}           },
         {
             "NUM": 27,
             "NAME": "",
@@ -399,8 +462,9 @@
                 "ny": 1,
                 "center": [4400, 1920]
             },
-            "LAYEROPTOUT": {}
-        },
+            "LAYEROPTOUT": {
+                "guardring": false
+}           },
         {
             "NUM": 28,
             "NAME": "",
@@ -426,8 +490,11 @@
                 "center": [-8520, -920],
                 "rotation": 90
             },
-            "LAYEROPTOUT": {}
-        },
+            "LAYEROPTOUT": {
+                "jte": false,
+                "pstop": false,
+                "guardring": false
+}        },
         {
             "NUM": 30,
             "NAME": "",
@@ -440,8 +507,12 @@
                 "center": [-6320, -920],
                 "rotation": 90
             },
-            "LAYEROPTOUT": {}
-        },
+            "LAYEROPTOUT": {
+                "gain" : false,
+                "jte": false,
+                "pstop": false,
+                "guardring": false
+}          },
         {
             "NUM": 31,
             "NAME": "",
@@ -454,8 +525,10 @@
                 "center": [-4120, -920],
                 "rotation": 90
             },
-            "LAYEROPTOUT": {}
-        },
+            "LAYEROPTOUT": {
+                "pstop": false,
+                "guardring": false
+}          },
         {
             "NUM": 32,
             "NAME": "",
@@ -468,8 +541,9 @@
                 "center": [-1920, -920],
                 "rotation": 90
             },
-            "LAYEROPTOUT": {}
-        },
+            "LAYEROPTOUT": {
+                "guardring": false
+}       },
         {
             "NUM": 33,
             "NAME": "",
@@ -481,8 +555,11 @@
                 "ny": 2,
                 "center": [920, -920]
             },
-            "LAYEROPTOUT": {}
-        },
+            "LAYEROPTOUT": {
+                "jte": false,
+                "pstop": false,
+                "guardring": false
+}         },
         {
             "NUM": 34,
             "NAME": "",
@@ -494,8 +571,10 @@
                 "ny": 2,
                 "center": [4400, -920]
             },
-            "LAYEROPTOUT": {}
-        },
+            "LAYEROPTOUT": {
+                "pstop": false,
+                "guardring": false
+}         },
         {
             "NUM": 35,
             "NAME": "",
@@ -521,7 +600,11 @@
                 "center": [-8520, -4400],
                 "rotation": 90
             },
-            "LAYEROPTOUT": {}
+            "LAYEROPTOUT": {
+                "jte": false,
+                "pstop": false,
+                "guardring": false
+}  
         },
         {
             "NUM": 37,
@@ -535,8 +618,12 @@
                 "center": [-6320, -4400],
                 "rotation": 90
             },
-            "LAYEROPTOUT": {}
-        },
+            "LAYEROPTOUT": {
+                "gain" : false,
+                "jte": false,
+                "pstop": false,
+                "guardring": false
+}          },
         {
             "NUM": 38,
             "NAME": "",
@@ -549,8 +636,10 @@
                 "center": [-4120, -4400],
                 "rotation": 90
             },
-            "LAYEROPTOUT": {}
-        },
+            "LAYEROPTOUT": {
+                "pstop": false,
+                "guardring": false
+}         },
         {
             "NUM": 39,
             "NAME": "",
@@ -563,8 +652,9 @@
                 "center": [-1920, -4400],
                 "rotation": 90
             },
-            "LAYEROPTOUT": {}
-        },
+            "LAYEROPTOUT": {
+                "guardring": false
+}         },
         {
             "NUM": 40,
             "NAME": "",
@@ -576,8 +666,11 @@
                 "ny": 2,
                 "center": [920, -4400]
             },
-            "LAYEROPTOUT": {}
-        },
+            "LAYEROPTOUT": {
+                "jte": false,
+                "pstop": false,
+                "guardring": false
+}         },
         {
             "NUM": 41,
             "NAME": "",
@@ -589,8 +682,10 @@
                 "ny": 2,
                 "center": [4400, -4400]
             },
-            "LAYEROPTOUT": {}
-        },
+            "LAYEROPTOUT": {
+                "pstop": false,
+                "guardring": false
+}            },
         {
             "NUM": 42,
             "NAME": "",
@@ -671,8 +766,11 @@
                 "ny": 2,
                 "center": [920, -7880]
             },
-            "LAYEROPTOUT": {}
-        },
+            "LAYEROPTOUT": {
+                "jte": false,
+                "pstop": false,
+                "guardring": false
+}        },
         {
             "NUM": 48,
             "NAME": "",
@@ -684,8 +782,10 @@
                 "ny": 2,
                 "center": [4400, -7880]
             },
-            "LAYEROPTOUT": {}
-        },
+            "LAYEROPTOUT": {
+                "pstop": false,
+                "guardring": false
+}           },
         {
             "NUM": 49,
             "NAME": "",
