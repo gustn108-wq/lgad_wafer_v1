@@ -48,6 +48,7 @@ class DimPeriphery:
         self.dim_pads = dim_pads
         pad_size = dim_pads[0].pad_size
         self.pad_offset = self.dim_pads[0].jte_width + self.dim_pads[0].pstop_width + self.dim_pads[0].pstop_gap
+        self.gr_gap = self.dim_pads[0].gr_gap
 
         #if self.c_pads == []:
         self.c_pads = []

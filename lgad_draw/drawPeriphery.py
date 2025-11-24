@@ -6,7 +6,7 @@ from . import layer_default
 
 
 class DrawPeriphery:
-    tol = 0.1
+    tol = 0.001
     join='round'
     layerset = layer_default.layerset
 
@@ -14,8 +14,18 @@ class DrawPeriphery:
         if not isinstance(dim_per, DimPeriphery):
             raise
 
-        self.d_outmost = None
         self.dim_per = dim_per
+
+        bsize = self.dim_per.base_size
+        bcenter = self.dim_per.base_center
+        pad_offset = self.dim_per.pad_offset
+
+        # inner rectangle
+        rect_base = pg.rectangle(size=bsize, layer=99)
+        rect_pads = pg.offset(rect_base, distance=pad_offset, join=self.join, layer=99, tolerance=self.tol)
+        rect_pads.center = bcenter
+
+        self.d_outmost = rect_pads
 
     def DrawPstop(self, layer=layerset['PSTOP']):
         size = self.dim_per.pstop_size

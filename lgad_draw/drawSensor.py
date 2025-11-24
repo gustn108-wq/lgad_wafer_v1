@@ -16,7 +16,7 @@ class DrawSensor:
                 gain=True, nplus=True, jte=True, padild=True, 
                 padmetal=True, padoxide=True,
                 pstop=True, guardring=True, edge=True, 
-                rounding=True, tol=0.1, print_progress=False, 
+                rounding=True, tol=0.01, print_progress=False, 
                 sensor_name=None, reticle_name=None, reticle_name_blank=False,
                 blank_size=None,
                 layerset=None, rotation=0):
@@ -108,15 +108,15 @@ class DrawSensor:
             pad0.add(d_pstop1)
             if print_progress: print ('pstop is drawn')
 
-        if padild:
-            d_padild = draw_pad.DrawPadILD(layer=self.layerset['ILD'])
-            pad0.add(d_padild) 
-            if print_progress: print ('pad ild is drawn.')
-
         if padmetal:
             d_padme = draw_pad.DrawPadMetal(layer=self.layerset['METAL'])
             pad0.add(d_padme) 
             if print_progress: print ('pad metal is drawn.')
+
+        if padild:
+            d_padild = draw_pad.DrawPadILD(layer=self.layerset['ILD'])
+            pad0.add(d_padild) 
+            if print_progress: print ('pad ild is drawn.')
 
         if padoxide:
             d_padox = draw_pad.DrawPadOxide(layer=self.layerset['OXIDE'])

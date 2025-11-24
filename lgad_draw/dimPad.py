@@ -1,4 +1,3 @@
-
 ## all dimensions in micrometer (um)
 
 class DimPad:
@@ -12,7 +11,7 @@ class DimPad:
     jte_width  = 20
     jte_center = (0, 0)
 
-    pstop_gap   = 20
+    pstop_gap_   = 20
     pstop_width = 10
     pstop_center = (0, 0)
 
@@ -32,7 +31,18 @@ class DimPad:
                    (450, 0)]
 
     #pad_size   = (jte_size[0]+jte_width, jte_size[1]+jte_width)
-    pad_size   = (jte_size[0]+jte_width+pstop_gap+pstop_width, jte_size[1]+jte_width+pstop_gap+pstop_width)
+    #pad_size   = (jte_size[0]+jte_width+pstop_gap+pstop_width, jte_size[1]+jte_width+pstop_gap+pstop_width)
+    pad_size   = (1300, 1300)
     pad_center = (0, 0)
 
     ild_offset = 1
+
+    @property
+    def pstop_gap(self):
+        return 0.5 * (
+            (self.pad_size[0] - self.nplus_size[0]) / 2
+            - (self.jte_width + self.pstop_width))
+    @property
+    def gr_gap(self):
+        return self.pstop_gap
+

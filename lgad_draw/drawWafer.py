@@ -149,7 +149,7 @@ class DrawWafer:
 
         return D_akey
 
-    def LoadSrc(self, srcfile, rtname=None):
+    def LoadSrc_org(self, srcfile, rtname=None):
         print (f'[DrawWafer] Loading {srcfile}')
         if srcfile in self.d_loaded.keys():
             return self.d_loaded[srcfile]
@@ -181,6 +181,49 @@ class DrawWafer:
         self.d_loaded[srcfile] = ret
 
         return ret
+
+    def LoadSrc(self, srcfile, rtname=None):
+        print (f'[DrawWafer] Loading {srcfile}')
+
+        srcfile1 = self.TryPaths_gds(srcfile)
+        if srcfile1 is not None:
+            ret = self.LoadSrc_gds(srcfile1, rtname)
+            self.d_loaded[srcfile] = ret
+            return ret
+
+        srcfile1 = self.TryPaths_json(srcfile)
+        if srcfile1 is not None:
+            ret = self.LoadSrc_json(srcfile1, rtname)
+            self.d_loaded[srcfile] = ret
+            return ret
+
+        raise FileNotFoundError(srcfile)
+
+    def TryPaths_gds(self, srcfile):
+        candidates = [  
+                srcfile, 
+                srcfile + '.gds',
+                os.path.join(self.gdspath, srcfile),
+                os.path.join(self.gdspath, srcfile + '.gds')
+            ]
+        for p in candidates:
+            if os.path.exists(p):
+                return p
+
+        return None
+
+    def TryPaths_json(self, srcfile):
+        candidates = [  
+                srcfile, 
+                srcfile + '.json',
+                os.path.join(self.jsonpath, srcfile),
+                os.path.join(self.jsonpath, srcfile + '.json')
+            ]
+        for p in candidates:
+            if os.path.exists(p):
+                return p
+
+        return None
 
     def LoadSrc_gds(self, fname, rtname=None):
         d_reticle = pg.import_gds(fname)

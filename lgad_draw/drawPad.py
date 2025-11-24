@@ -14,7 +14,7 @@ class DrawPad:
     d_jte = None
     d_padmetal = None
     d_padoxide = None
-    tol = 0.1
+    tol = 0.001
     join='round'
     layerset = layer_default.layerset
 
@@ -24,35 +24,44 @@ class DrawPad:
 
         self.dim_pad = dim_pad
 
-    def DrawGain(self, layer=layerset['GAIN']):
+    def DrawGain(self, layer=layerset['GAIN'], rounding=3):
         size = self.dim_pad.gain_size
         center = self.dim_pad.gain_center
 
         gain = pg.rectangle(size=size, layer=layer)
+        if rounding:
+            gain = pg.offset(gain, distance=-rounding, layer=layer)
+            gain = pg.offset(gain, distance=+rounding, layer=layer, join=self.join, tolerance=self.tol)
         gain.center = center
         gain.simplify(self.tol)
 
         self.d_gain = gain
         return gain
 
-    def DrawNplus(self, layer=layerset['NPLUS']):
+    def DrawNplus(self, layer=layerset['NPLUS'], rounding=5):
         size = self.dim_pad.nplus_size
         center = self.dim_pad.nplus_center
 
         nplus = pg.rectangle(size=size, layer=layer)
+        if rounding:
+            nplus = pg.offset(nplus, distance=-rounding, layer=layer)
+            nplus = pg.offset(nplus, distance=+rounding, layer=layer, join=self.join, tolerance=self.tol)
         nplus.center = center
         nplus.simplify(self.tol)
 
         self.d_nplus = nplus
         return nplus 
         
-    def DrawJTE(self, layer=layerset['JTE']):
+    def DrawJTE(self, layer=layerset['JTE'], rounding_in=5):
         size = self.dim_pad.jte_size
         width = self.dim_pad.jte_width
         center = self.dim_pad.jte_center
 
         rect_in  = pg.rectangle(size=size, layer=99)
         rect_out = pg.offset(rect_in, distance=width, join=self.join, layer=99, tolerance=self.tol)
+        if rounding_in:
+            rect_in = pg.offset(rect_in, distance=-rounding_in, layer=99)
+            rect_in = pg.offset(rect_in, distance=+rounding_in, layer=99, join=self.join, tolerance=self.tol)
         rect_out.simplify(self.tol)
 
         jte = pg.boolean(rect_out, rect_in, operation='not', layer=layer)
@@ -82,7 +91,7 @@ class DrawPad:
         self.d_pstop = pstop
         return pstop
 
-    def DrawPadMetal(self, layer=layerset['METAL']):
+    def DrawPadMetal(self, layer=layerset['METAL'], rounding=5, rounding_win=3):
         size = self.dim_pad.padmetal_size
         center = self.dim_pad.padmetal_center
         optwin_N = self.dim_pad.optwin_N
@@ -92,9 +101,16 @@ class DrawPad:
         metal = pg.rectangle(size=size, layer=layer)
         metal.center = center
 
+        if rounding:
+            metal = pg.offset(metal, distance=-rounding, layer=layer)
+            metal = pg.offset(metal, distance=+rounding, join=self.join, tolerance=self.tol, layer=layer)
+
         for i in range(optwin_N):
             rect_win = pg.rectangle(size=optwin_size[i], layer=99)
             rect_win.center = optwin_pos[i]
+            if rounding_win:
+                rect_win = pg.offset(rect_win, distance=-rounding_win)
+                rect_win = pg.offset(rect_win, distance=+rounding_win, join=self.join, tolerance=self.tol)
             metal = pg.boolean(metal, rect_win, operation='not', layer=layer)
             
         metal.simplify(self.tol)
@@ -102,7 +118,7 @@ class DrawPad:
         self.d_padmetal = metal
         return metal
 
-    def DrawPadOxide(self, layer=layerset['OXIDE']):
+    def DrawPadOxide(self, layer=layerset['OXIDE'], rounding_win=3, offset_win=10):
         size = self.dim_pad.padoxide_size
         width = self.dim_pad.padoxide_width
         center = self.dim_pad.padoxide_center
@@ -117,6 +133,7 @@ class DrawPad:
 
         for i in range(optwin_N):
             rect_win = pg.rectangle(size=optwin_size[i], layer=99)
+            rect_win = pg.offset(rect_win, distance=offset_win, layer=99)
             rect_win.center = optwin_pos[i]
             oxide = pg.boolean(oxide, rect_win, operation='not', layer=layer)
 
@@ -125,7 +142,7 @@ class DrawPad:
         self.d_padoxide = oxide
         return oxide
 
-    def DrawPadILD(self, layer=layerset['ILD']):
+    def DrawPadILD(self, layer=layerset['ILD'], rounding=3):
         size = self.dim_pad.padmetal_size
         center = self.dim_pad.padmetal_center
         optwin_N = self.dim_pad.optwin_N
@@ -133,13 +150,17 @@ class DrawPad:
         optwin_pos  = self.dim_pad.optwin_pos
         ild_offset = self.dim_pad.ild_offset
 
-        ild = pg.rectangle(size=(size[0]-ild_offset*2, size[1]-ild_offset*2), layer=layer)
+        #ild = pg.rectangle(size=(size[0]-ild_offset*2, size[1]-ild_offset*2), layer=layer)
+        ild = pg.offset(self.d_padmetal, distance=-ild_offset-rounding, layer=layer, join=self.join, tolerance=self.tol)
+        ild = pg.offset(ild, distance=rounding, layer=layer, join=self.join, tolerance=self.tol)
         ild.center = center
 
+        """
         for i in range(optwin_N):
             rect_win = pg.rectangle(size=(optwin_size[i][0]+ild_offset*2, optwin_size[i][1]+ild_offset*2), layer=99)
             rect_win.center = optwin_pos[i]
             ild = pg.boolean(ild , rect_win, operation='not', layer=layer)
+        """
             
         ild.simplify(self.tol)
 
